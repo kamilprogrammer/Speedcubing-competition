@@ -1,0 +1,31 @@
+.custom-cursor-wrapper {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease;
+}
+
+.custom-cursor-image {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.custom-cursor-name {
+  font-size: 16px;
+  background: #ff6500;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+@media (max-width: 768px) {
+  .custom-cursor-wrapper {
+    display: none;
+  }
+}
