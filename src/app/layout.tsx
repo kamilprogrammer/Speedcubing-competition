@@ -2,7 +2,7 @@ import "./style.css";
 
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-
+import { Theme } from "@radix-ui/themes";
 import Header from "@/components/ui/header";
 
 const inter = Inter({
@@ -54,9 +54,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}
       >
+        <Header />
         <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
-          <Header />
-          {children}
+          <Theme appearance="dark" accentColor="orange" grayColor="mauve">
+            {children}
+          </Theme>
         </div>
       </body>
     </html>

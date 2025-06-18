@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import type { StaticImageData } from "next/image";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
-import IllRight from "./ill_right";
 interface ModalVideoProps {
   thumb: StaticImageData;
   thumbWidth: number;
