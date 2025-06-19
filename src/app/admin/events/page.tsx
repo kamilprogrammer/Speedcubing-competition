@@ -1,0 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+import { Trophy } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import supabase from "@/app/supabase-client";
+
+export default function Events() {
+  const [events, setEvents] = useState<any[]>([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const data = (await supabase.from("events").select("*")).data;
+      console.log(data);
+      setEvents(data || []);
+    };
+    fetch();
+  }, []);
+  return (
+    <div className="space-y-6 animate-fade-in">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Events</h1>
+          <p className="text-muted-foreground">
+            Manage competition events and their settings
+          </p>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {events.map((event) => (
+          <Card key={event?.id} className="admin-card-hover">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <Trophy className="h-8 w-8 text-primary" />
+                <Badge variant="outline">{event.event_name}</Badge>
+              </div>
+              <CardTitle className="text-lg">{event?.event_name}</CardTitle>
+              {/*              <CardDescription>
+                {event} round{event.rounds > 1 ? "s" : ""}
+              </CardDescription> */}{" "}
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -4,6 +4,8 @@
 @import "./css/additional-styles/utility-patterns.css" layer(components);
 @import "./css/additional-styles/theme.css";
 @import "tw-animate-css";
+@import "@radix-ui/themes/styles.css";
+
 /*
   ---break---
 */

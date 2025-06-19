@@ -13,7 +13,7 @@ export default function Header() {
             <Image src={logo} alt="logo" width={36} />
             <Link
               href="/"
-              className="ml-2 text-md font-semibold text-gray-300 mt-1"
+              className="ml-2 text-md font-semibold text-gray-300 mt-1 cursor-none"
             >
               <span className="font-black">SCH</span>
             </Link>
