@@ -27,7 +27,7 @@ export interface Solve {
   eventId: string;
   round: number;
   attempt: number;
-  time: number;
+  time: string;
   penalty?: "DNF" | "+2";
   scramble: string;
   timestamp: string;
@@ -191,7 +191,7 @@ export const mockSolves: Solve[] = [
     eventId: "3x3",
     round: 1,
     attempt: 1,
-    time: 7.23,
+    time: "7.23",
     scramble: "R U R' U' R U R' F R F'",
     timestamp: "2024-01-20T10:30:00Z",
   },

@@ -1,16 +1,52 @@
+"use client";
 import { Users, Trophy, Timer, Zap } from "lucide-react";
 import { StatCard } from "@/components/dashboard/StatCard";
-import { mockDashboardStats, formatTime } from "..//..//app/mock-data";
+import { useEffect, useState } from "react";
+import supabase from "@/app/supabase-client";
 
 export default function Dashboard() {
-  const stats = mockDashboardStats;
+  const [totalCompetitors, setTotalCompetitors] = useState(0);
+  const [totalEvents, setTotalEvents] = useState(0);
+  const [totalSolves, setTotalSolves] = useState(0);
+  const [fastestSolve, setFastestSolve] = useState({
+    time: 0,
+    event: "",
+    competitor: "",
+  });
+  useEffect(() => {
+    const fetch = async () => {
+      const users = (await supabase.from("users").select("*")).data?.length;
+      setTotalCompetitors(users || 0);
+
+      const events = (await supabase.from("events").select("*")).data?.length;
+      setTotalEvents(events || 0);
+
+      const solves = (await supabase.from("solves").select("*")).data?.length;
+      setTotalSolves(solves || 0);
+
+      const fastest = await supabase
+        .from("solves")
+        .select("time, eventid, userid, events(event_name), users(username)")
+        .order("time", { ascending: true })
+        .limit(1)
+        .single();
+
+      setFastestSolve({
+        time: fastest.data?.time || 0.0,
+        event: fastest.data?.events?.event_name || "",
+        competitor: fastest.data?.users?.username || "",
+      });
+    };
+
+    fetch();
+  }, []);
 
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
-          Welcome to the CubeComp competition management system
+          Welcome to the SpeedCubing Syrian competition Management System
         </p>
       </div>
 
@@ -18,29 +54,26 @@ export default function Dashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Total Competitors"
-          value={stats.totalCompetitors}
+          value={totalCompetitors}
           description="Registered for competition"
           icon={Users}
-          trend={{ value: 12, isPositive: true }}
         />
         <StatCard
           title="Active Events"
-          value={stats.totalEvents}
+          value={totalEvents}
           description="Events in competition"
           icon={Trophy}
-          trend={{ value: 0, isPositive: true }}
         />
         <StatCard
           title="Total Solves"
-          value={stats.totalSolves.toLocaleString()}
+          value={totalSolves}
           description="Submitted this competition"
           icon={Timer}
-          trend={{ value: 8, isPositive: true }}
         />
         <StatCard
           title="Fastest Solve"
-          value={`${formatTime(stats.fastestSolve.time)}`}
-          description={`${stats.fastestSolve.event} by ${stats.fastestSolve.competitor}`}
+          value={fastestSolve.time}
+          description={`${fastestSolve.event} by ${fastestSolve.competitor}`}
           icon={Zap}
           className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20"
         />

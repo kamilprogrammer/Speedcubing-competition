@@ -1,12 +1,4 @@
-import {
-  BarChart3,
-  Users,
-  Trophy,
-  Timer,
-  Settings,
-  Zap,
-  Home,
-} from "lucide-react";
+import { BarChart3, Users, Trophy, Timer, Zap, Home } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -27,33 +19,27 @@ import { Badge } from "@/components/ui/badge";
 const navigationItems = [
   {
     title: "Dashboard",
-    url: "/dashboard",
+    url: "/admin",
     icon: BarChart3,
     badge: null,
   },
   {
     title: "Competitors",
-    url: "/competitors",
+    url: "/admin/competitors",
     icon: Users,
     badge: "125",
   },
   {
     title: "Events",
-    url: "/events",
+    url: "/admin/events",
     icon: Trophy,
     badge: "8",
   },
   {
     title: "Solves",
-    url: "/solves",
+    url: "/admin/solves",
     icon: Timer,
     badge: "1,247",
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
-    badge: null,
   },
 ];
 
@@ -62,9 +48,9 @@ export default function AdminSidebar() {
     <Sidebar variant="inset">
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/dashboard">
+          <SidebarMenuItem className="cursor-none">
+            <SidebarMenuButton size="lg" asChild className="cursor-none">
+              <Link href="/admin">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <Zap className="size-4" />
                 </div>
@@ -88,8 +74,12 @@ export default function AdminSidebar() {
               {navigationItems.map((item) => {
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={true} className="h-10">
-                      <Link href={item.url}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={true}
+                      className="h-10 cursor-none"
+                    >
+                      <Link href={item.url} className="cursor-none">
                         <item.icon className="size-4" />
                         <span>{item.title}</span>
                         {item.badge && (

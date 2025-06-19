@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import CustomCursor from "@/components/ui/CustomCursor";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Theme } from "@radix-ui/themes";
 import AdminSidebar from "@/components/ui/AdminSideBar";
 export default function DefaultLayout({
   children,
@@ -24,12 +25,13 @@ export default function DefaultLayout({
   return (
     <>
       <CustomCursor />
+      <Theme appearance="dark" accentColor="orange" grayColor="mauve">
+        <SidebarProvider>
+          <AdminSidebar />
 
-      <SidebarProvider>
-        <AdminSidebar />
-
-        <main className="flex-1 space-y-4 p-4 md:p-8 pt-6">{children}</main>
-      </SidebarProvider>
+          <main className="flex-1 space-y-4 p-4 md:p-8 pt-6">{children}</main>
+        </SidebarProvider>
+      </Theme>
     </>
   );
 }
