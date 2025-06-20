@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Timer, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -13,15 +12,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
 import supabase from "@/app/supabase-client";
 import { Solve } from "@/app/types";
 
 export default function Solves() {
   const [solves, setSolves] = useState<Solve[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredSolves, setFilteredSolves] = useState<Solve[]>(solves);
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [filteredSolves, setFilteredSolves] = useState<Solve[]>([]);
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: string }>({
+    key: "",
+    direction: "asc",
+  });
 
   useEffect(() => {
     const fetch = async () => {
@@ -33,10 +34,11 @@ export default function Solves() {
         console.error("Error fetching users:", error);
         return;
       }
-      setSolves(data);
+      setSolves(data as Solve[]);
+      setFilteredSolves(data)
     };
-
-    fetch();
+    fetch()
+        
   }, []);
 
   const handleFilter = (eventName: string) => {
@@ -46,21 +48,23 @@ export default function Solves() {
     setFilteredSolves(filtered);
   };
 
-  const handleSort = (key) => {
+  const handleSort = (key: string) => {
     const direction =
       sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
     const sorted = [...filteredSolves].sort((a, b) => {
-      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
-      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      if (a[key as keyof Solve] < b[key as keyof Solve]) return direction === "asc" ? -1 : 1;
+      if (a[key as keyof Solve] > b[key as keyof Solve]) return direction === "asc" ? 1 : -1;
       return 0;
     });
-
-    setSortConfig({ key, direction });
-    setFilteredSolves(sorted);
+    if (key) {
+      setSortConfig({ key, direction });
+      setFilteredSolves(sorted);
+    }
   };
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {/* ...rest of your JSX unchanged */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Solves</h1>

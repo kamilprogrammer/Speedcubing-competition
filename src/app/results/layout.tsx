@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CustomCursor from "@/components/ui/CustomCursor";
+import Header from "@/components/ui/header";
 export default function DefaultLayout({
   children,
 }: {
@@ -22,6 +23,7 @@ export default function DefaultLayout({
   return (
     <>
       <CustomCursor />
+      <Header />
 
       <main className="relative flex grow flex-col">{children}</main>
     </>

@@ -2,16 +2,28 @@
 "use client";
 import { Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import supabase from "@/app/supabase-client";
+import { Button } from "@/components/ui/button";
 
 export default function Events() {
   const [events, setEvents] = useState<any[]>([]);
+
+  const deleteEvent = async (eventId: number) => {
+    const { error } = await supabase.from("events").delete().eq("id", eventId);
+    if (error) {
+      console.error("Failed to delete event:", error.message);
+      alert("Error deleting event");
+    } else {
+      // Optional: refetch events after deletion
+      setEvents((prev) => prev.filter((e) => e.id !== eventId));
+      alert("Event deleted successfully");
+    }
+  };
   useEffect(() => {
     const fetch = async () => {
       const data = (await supabase.from("events").select("*")).data;
-      console.log(data);
       setEvents(data || []);
     };
     fetch();
@@ -40,6 +52,17 @@ export default function Events() {
                 {event} round{event.rounds > 1 ? "s" : ""}
               </CardDescription> */}{" "}
             </CardHeader>
+            <CardFooter>
+              <Button
+                variant={"destructive"}
+                className="w-full"
+                onClick={() => {
+                  deleteEvent(event.id);
+                }}
+              >
+                Delete
+              </Button>
+            </CardFooter>
           </Card>
         ))}
       </div>

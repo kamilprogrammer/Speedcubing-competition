@@ -11,6 +11,7 @@ export default function HeaderWrap() {
     "/admin/competitors",
     "/admin/events",
     "/admin/solves",
+    "/results"
   ];
   const showNavbar = !hideNavbarRoutes.includes(pathname);
 

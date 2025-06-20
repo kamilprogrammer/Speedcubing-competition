@@ -34,11 +34,14 @@ export const AnimatedTestimonials = ({
   };
 
   useEffect(() => {
+    const handleNext = () => {
+    setActive((prev) => (prev + 1) % testimonials.length);
+  };
     if (autoplay) {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, testimonials]);
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
@@ -159,20 +162,20 @@ export const AnimatedTestimonials = ({
           <div className="flex gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="cursor-none group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
             >
               <IconArrowLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
             </button>
             <button
               onClick={handleNext}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="cursor-none group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
             >
               <IconArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
             </button>
           </div>
         </div>
       </div>
-      <div className="translate-x-1/6 mr-40 -z-10 -mt-20 md:block hidden">
+      <div className="relative translate-x-1/6 mr-40 -z-50 -mt-20 md:block hidden">
         <IllRight small={true} height={1150} width={1150} right={false} />
       </div>
     </div>
