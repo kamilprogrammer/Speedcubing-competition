@@ -9,7 +9,7 @@ export default function Dashboard() {
   const [totalEvents, setTotalEvents] = useState(0);
   const [totalSolves, setTotalSolves] = useState(0);
   const [fastestSolve, setFastestSolve] = useState({
-    time: 0,
+    time: 1,
     event: "",
     competitor: "",
   });
@@ -27,15 +27,19 @@ export default function Dashboard() {
       const fastest = await supabase
         .from("solves")
         .select("time, eventid, userid, events(event_name), users(username)")
-        .order("time", { ascending: true })
-        .limit(1)
-        .single();
-
-      setFastestSolve({
-        time: fastest.data?.time || 0.0,
-        event: fastest.data?.events?.event_name || "",
-        competitor: fastest.data?.users?.username || "",
-      });
+        .order("time", { ascending: true });
+      if (fastest.data && fastest.data.length > 0) {
+        const validSolve = fastest.data.find(
+          (solve) => solve.time !== "0" && solve.time !== 0
+        );
+        if (validSolve) {
+          setFastestSolve({
+            time: validSolve.time,
+            event: validSolve.events[0]?.event_name || "",
+            competitor: validSolve.users[0]?.username || "",
+          });
+        }
+      }
     };
 
     fetch();

@@ -3,11 +3,7 @@ import React from "react";
 import illRightImage from "..//..//..//public/images/ill_right.png";
 import illRightSmallImage from "..//..//..//public/images/ill_right_s.png";
 import illLeftSmallImage from "..//..//..//public/images/ill_left_s.png";
-import illLeftImage from "..//..//..//public/images/ill_left.png";
-export default function IllRight(props) {
-  console.log(props.small);
-  console.log(props.width);
-  console.log(props.height);
+export default function IllRight(props: { right: boolean; small: boolean; width: string | number | undefined; height: string | number | undefined; }) {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-12 py-12 mx-auto">
       <div
@@ -23,8 +19,8 @@ export default function IllRight(props) {
                 : illRightImage
               : illLeftSmallImage
           }
-          width={props.width}
-          height={props.height}
+          width={Number(props.width)}
+          height={Number(props.height)}
           alt="Secondary illustration"
         />
       </div>

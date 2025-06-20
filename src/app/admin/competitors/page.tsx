@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
+import AddCompetitorDialog from "./dialog";
+import AddSolveDialog from "./solveDialog";
 import {
   Table,
   TableBody,
@@ -17,8 +19,11 @@ import supabase from "@/app/supabase-client";
 import { User } from "@/app/types";
 
 export default function Competitors() {
+  const [open, setOpen] = useState(false);
+  const [solveopen, setSolveOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [competitors, setCompetitors] = useState<User[]>([]);
+  const [selected, setSelected] = useState<User | null>(null);
 
   useEffect(() => {
     const fetch = async () => {
@@ -87,6 +92,15 @@ export default function Competitors() {
               value={search}
             />
           </div>
+          <Button
+            variant="default"
+            onClick={() => setOpen(true)}
+            className="px-4 py-2 cursor-none"
+          >
+            Add Competitor
+          </Button>
+
+          <AddCompetitorDialog open={open} setOpen={setOpen} />
         </div>
       </div>
 
@@ -128,6 +142,22 @@ export default function Competitors() {
 
                 <TableCell>
                   <div className="flex items-center gap-2">
+                    <Button
+                      variant="default"
+                      className="cursor-none"
+                      size="sm"
+                      onClick={() => {
+                        setSelected(competitor);
+                        setSolveOpen(true);
+                      }}
+                    >
+                      Add
+                    </Button>
+                    <AddSolveDialog
+                      open={solveopen}
+                      setOpen={setSolveOpen}
+                      user={selected}
+                    />
                     <Button
                       variant="secondary"
                       className="bg-red-700 cursor-none"

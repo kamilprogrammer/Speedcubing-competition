@@ -27,7 +27,7 @@ export default function Index() {
     fetch();
   }, [select, setSelect]);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#030712] to-slate-800 relative">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#1e293b,transparent)] opacity-50" />
 

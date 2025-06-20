@@ -14,7 +14,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Badge } from "@/components/ui/badge";
 
 const navigationItems = [
   {
@@ -27,7 +26,6 @@ const navigationItems = [
     title: "Competitors",
     url: "/admin/competitors",
     icon: Users,
-    badge: "125",
   },
   {
     title: "Events",
@@ -82,14 +80,6 @@ export default function AdminSidebar() {
                       <Link href={item.url} className="cursor-none">
                         <item.icon className="size-4" />
                         <span>{item.title}</span>
-                        {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className="ml-auto h-5 px-1.5 text-xs"
-                          >
-                            {item.badge}
-                          </Badge>
-                        )}
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

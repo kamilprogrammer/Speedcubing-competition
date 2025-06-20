@@ -38,7 +38,6 @@ export default function SignIn() {
                 ) as HTMLInputElement;
                 if (emailInput && emailInput.value === "admin@gmail.com") {
                   localStorage.setItem("role", "admin");
-                  console.log("admin");
                   router.push("/admin");
                   // Handle admin login
                 }

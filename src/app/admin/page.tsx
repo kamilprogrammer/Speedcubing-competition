@@ -10,6 +10,6 @@ export default function AdminPage() {
     if (role !== "admin") {
       router.replace("/not-authorized");
     }
-  }, []);
+  }, [router]);
   return <Dashboard />;
 }
