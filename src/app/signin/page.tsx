@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 
 export default function SignIn() {
   const router = useRouter();
+  const password = process.env.NEXT_PUBLIC_SECRET_KEY;
+  console.log(password);
   return (
     <section className="">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -21,7 +23,7 @@ export default function SignIn() {
             src="/images/logo.png"
             alt="logo"
           />
-          SCH
+          SSCO 25
         </Link>
         <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -36,10 +38,20 @@ export default function SignIn() {
                 const emailInput = form.elements.namedItem(
                   "email"
                 ) as HTMLInputElement;
-                if (emailInput && emailInput.value === "admin@gmail.com") {
+                const passwordInput = form.elements.namedItem(
+                  "password"
+                ) as HTMLInputElement;
+                console.log(passwordInput.value);
+                console.log(password);
+                console.log(password === passwordInput.value);
+                if (
+                  emailInput &&
+                  emailInput.value === "admin@gmail.com" &&
+                  passwordInput &&
+                  passwordInput.value === password
+                ) {
                   localStorage.setItem("role", "admin");
                   router.push("/admin");
-                  // Handle admin login
                 }
               }}
             >

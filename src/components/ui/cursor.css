@@ -24,7 +24,7 @@
   border-radius: 12px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-@media (max-width: 768px) {
+@media (max-width: 1068px) {
   .custom-cursor-wrapper {
     display: none;
   }
