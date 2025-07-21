@@ -1,4 +1,4 @@
-"use clinet";
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "..//..//..//public/images/logo.png";
@@ -15,7 +15,7 @@ export default function Header() {
               href="/"
               className="ml-2 text-md font-semibold text-gray-300 mt-1 cursor-none"
             >
-              <span className="font-black">SCH</span>
+              <span className="font-black">SSCO 25</span>
             </Link>
           </div>
 
