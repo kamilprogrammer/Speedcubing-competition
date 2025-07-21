@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
 import VideoThumb from "..//..//..//public/images/hero-image-01.jpg";
 import ModalVideo from "@/components/ui/modal-video";
-
+import supabase from "../../app/supabase-client";
+import { Badge } from "@/components/ui/badge";
 export default function Hero() {
+  const [status, setStatus] = useState<string>("");
+  useEffect(() => {
+    const fetch = async () => {
+      const data = (await supabase.from("status").select("*")).data;
+      setStatus(data?.[0]?.status || "");
+    };
+    fetch();
+  }, []);
   return (
     <section>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -9,7 +19,21 @@ export default function Hero() {
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="absolute inset-0 -z-10 h-[648px] sm:h-[648px] md:h-[800px] lg:h-[948px] w-full bg-white [background:radial-gradient(140%_90%_at_50%_0%,#030712_40%,#FF6500_140%)]"></div>
-          <div className="pb-12 text-center md:pb-20">
+          <div className="pb-12 text-center items-center justify-center md:pb-20">
+            <Badge
+              className={`w-[200px] mb-2 text-white ${
+                status === "Finished" ? "bg-green-500" : ""
+              }`}
+              variant={
+                status === "Finished"
+                  ? "outline"
+                  : status === "Not Started Yet!"
+                  ? "destructive"
+                  : "default"
+              }
+            >
+              {status}
+            </Badge>
             <h1
               className="animate-[gradient_8s_linear_infinite] bg-[linear-gradient(to_right,var(--color-orange-500),var(--color-gray-50))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl"
               data-aos="fade-up"
