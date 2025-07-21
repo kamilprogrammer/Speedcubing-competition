@@ -29,9 +29,9 @@ export function DraggableCardDemo() {
   ];
   return (
     <>
-      <div className="absolute top-120 md:top-165 lg:top-193 z-[-11] h-screen w-screen bg-[#030712] bg-[radial-gradient(#ffffff33_1px,#030712_1px)] bg-[size:20px_20px]"></div>
+      <div className="absolute md:top-165 lg:top-193 z-[-11] h-[90vh] w-screen bg-[#030712] bg-[radial-gradient(#ffffff33_1px,#030712_1px)] bg-[size:20px_20px]"></div>
 
-      <DraggableCardContainer className="relative flex min-h-[610px] w-full items-center justify-center overflow-clip">
+      <DraggableCardContainer className="relative flex min-h-[550px] w-full items-center justify-center overflow-clip">
         <p className="absolute top-1/2 mx-auto max-w-md -translate-y-3/4 text-center text-xl font-black text-neutral-400 md:text-4xl dark:text-neutral-800">
           16/8/2025 - 17/8/2025🔥🔥🔥
         </p>
