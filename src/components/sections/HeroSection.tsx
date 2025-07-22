@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import VideoThumb from "..//..//..//public/images/hero-image-01.jpg";
-import ModalVideo from "@/components/ui/modal-video";
+import PdfThumb from "..//..//..//public/images/pdf.png";
+import ModalPdf from "../ui/modal-pdf";
 import supabase from "../../app/supabase-client";
 import { Badge } from "@/components/ui/badge";
 export default function Hero() {
@@ -18,22 +18,8 @@ export default function Hero() {
         {/* Hero content */}
         <div className="py-12 md:py-20">
           {/* Section header */}
-          <div className="absolute inset-0 -z-10 h-[648px] sm:h-[648px] md:h-[800px] lg:h-[948px] w-full bg-white [background:radial-gradient(140%_90%_at_50%_0%,#030712_40%,#FF6500_140%)]"></div>
+          <div className="absolute inset-0 -z-10 h-[648px] sm:h-[648px] md:h-[800px] lg:h-[1008px] w-full bg-white [background:radial-gradient(140%_90%_at_50%_0%,#030712_40%,#FF6500_140%)]"></div>
           <div className="pb-12 text-center items-center justify-center md:pb-20">
-            <Badge
-              className={`w-[200px] mb-2 text-white ${
-                status === "Finished" ? "bg-green-500" : ""
-              }`}
-              variant={
-                status === "Finished"
-                  ? "outline"
-                  : status === "Not Started Yet!"
-                  ? "destructive"
-                  : "default"
-              }
-            >
-              {status}
-            </Badge>
             <h1
               className="animate-[gradient_8s_linear_infinite] bg-[linear-gradient(to_right,var(--color-orange-500),var(--color-gray-50))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl"
               data-aos="fade-up"
@@ -46,8 +32,9 @@ export default function Hero() {
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                Hi Guys! Welcome to SpeedCubingHub! I really dont know what to
-                write here; BTW, we are still on testing mode; KamelRifai
+                {
+                  "Welcome to Speed-Cubing-Organization! Your one-stop platform to explore the world of speedcubing, We're still in beta, but we're excited to have you on board!"
+                }
               </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
@@ -72,17 +59,31 @@ export default function Hero() {
                   </a>
                 </div>
               </div>
+              <Badge
+                data-aos="fade-up"
+                data-aos-delay={400}
+                className={`w-[200px] mt-6 p-2 text-white ${
+                  status === "Finished" ? "bg-green-500" : ""
+                }`}
+                variant={
+                  status === "Finished"
+                    ? "outline"
+                    : status === "Not Started Yet!"
+                    ? "destructive"
+                    : "destructive"
+                }
+              >
+                {status}
+              </Badge>
             </div>
           </div>
 
-          <ModalVideo
-            thumb={VideoThumb}
+          <ModalPdf
+            thumb={PdfThumb}
             thumbWidth={1104}
             thumbHeight={576}
             thumbAlt="Modal video thumbnail"
-            video="videos//video.mp4"
-            videoWidth={1920}
-            videoHeight={1080}
+            pdf="/SSCO25.pdf"
           />
         </div>
       </div>

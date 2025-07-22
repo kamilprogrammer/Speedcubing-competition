@@ -13,19 +13,15 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import supabase from "@/app/supabase-client";
-import { Solve } from "@/app/types";
+import { Solve, Event } from "@/app/types";
 
 export default function Solves() {
   const [solves, setSolves] = useState<Solve[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSolves, setFilteredSolves] = useState<Solve[]>([]);
-  const [sortConfig, setSortConfig] = useState<{ key: string; direction: string }>({
-    key: "",
-    direction: "asc",
-  });
-
+  const [events, setEvents] = useState<Event[]>([]);
   useEffect(() => {
-    const fetch = async () => {
+    const fetchSolves = async () => {
       const { data, error } = await supabase
         .from("solves")
         .select("*, events(event_name), users(username)");
@@ -34,11 +30,21 @@ export default function Solves() {
         console.error("Error fetching users:", error);
         return;
       }
+      console.log(data);
       setSolves(data as Solve[]);
-      setFilteredSolves(data)
+      setFilteredSolves(data);
     };
-    fetch()
-        
+    fetchSolves();
+    const fetchEvents = async () => {
+      const { data, error } = await supabase.from("events").select("*");
+      if (error) {
+        console.error("Error fetching events:", error);
+        return;
+      }
+      console.log(data);
+      setEvents(data as Event[]);
+    };
+    fetchEvents();
   }, []);
 
   const handleFilter = (eventName: string) => {
@@ -46,20 +52,6 @@ export default function Solves() {
       (item) => item.events.event_name === eventName
     );
     setFilteredSolves(filtered);
-  };
-
-  const handleSort = (key: string) => {
-    const direction =
-      sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
-    const sorted = [...filteredSolves].sort((a, b) => {
-      if (a[key as keyof Solve] < b[key as keyof Solve]) return direction === "asc" ? -1 : 1;
-      if (a[key as keyof Solve] > b[key as keyof Solve]) return direction === "asc" ? 1 : -1;
-      return 0;
-    });
-    if (key) {
-      setSortConfig({ key, direction });
-      setFilteredSolves(sorted);
-    }
   };
 
   return (
@@ -95,18 +87,18 @@ export default function Solves() {
               }}
             />
           </div>
-          {solves.map((event) => (
+          {events.map((event) => (
             <Button
               key={event.id}
               variant="outline"
               size="sm"
               onClick={() => {
                 setSearchTerm("");
-                handleFilter(event.events.event_name);
+                handleFilter(event.event_name);
               }}
               className="cursor-none"
             >
-              {event.events.event_name}
+              {event.event_name}
             </Button>
           ))}
           <Button
@@ -159,40 +151,10 @@ export default function Solves() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead
-                onClick={() => handleSort("competitorName")}
-                className="cursor-none"
-              >
-                Competitor{" "}
-                {sortConfig.key === "competitorName"
-                  ? sortConfig.direction === "asc"
-                    ? "🔼"
-                    : "🔽"
-                  : ""}
-              </TableHead>
-              <TableHead
-                onClick={() => handleSort("eventName")}
-                className="cursor-none"
-              >
-                Event{" "}
-                {sortConfig.key === "eventName"
-                  ? sortConfig.direction === "asc"
-                    ? "🔼"
-                    : "🔽"
-                  : ""}
-              </TableHead>
-              <TableHead>Round</TableHead>
-              <TableHead
-                onClick={() => handleSort("time")}
-                className="cursor-none"
-              >
-                Time{" "}
-                {sortConfig.key === "time"
-                  ? sortConfig.direction === "asc"
-                    ? "🔼"
-                    : "🔽"
-                  : ""}
-              </TableHead>
+              <TableHead className="cursor-none">Competitor</TableHead>
+              <TableHead className="cursor-none">Event</TableHead>
+              <TableHead className="cursor-none">Round</TableHead>
+              <TableHead className="cursor-none">Time</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -204,7 +166,11 @@ export default function Solves() {
                 <TableCell>
                   <Badge variant="outline">{solve.events.event_name}</Badge>
                 </TableCell>
-                <TableCell>Round {solve.solveindex}</TableCell>
+                {solve.round !== 0 ? (
+                  <TableCell>Round {solve.round}</TableCell>
+                ) : (
+                  <TableCell>---</TableCell>
+                )}
                 <TableCell className="font-mono">{solve.time}</TableCell>
               </TableRow>
             ))}

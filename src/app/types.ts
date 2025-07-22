@@ -24,6 +24,7 @@ export interface Solve {
   user_id: number;
   event_id: number;
   time: string;
+  round: number;
   solveindex: number;
   events: { event_name: string };
   users: { username: string };

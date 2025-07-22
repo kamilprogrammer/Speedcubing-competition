@@ -1,7 +1,5 @@
 "use client";
 import Cta from "@/components/sections/Cta";
-import Cube from "@/components/sections/cube";
-import { DraggableCardDemo } from "@/components/sections/Draggable";
 import HeroSection from "@/components/sections/HeroSection";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import CustomCursor from "@/components/ui/CustomCursor";
@@ -28,11 +26,10 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         <CustomCursor />
-
         <HeroSection />
-        <DraggableCardDemo />
         <AnimatedTestimonials testimonials={testimonials} />
-        <Cube />
+        {/* 
+        <Cube />*/}
         <Cta />
       </main>
     </div>
