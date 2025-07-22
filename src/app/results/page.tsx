@@ -25,23 +25,29 @@ export default function Index() {
     };
     fetch();
   }, []);
+  async function getRound() {
+    if ((select === 17 || select === 18) && round === 0) {
+      setRound(1);
+    } else if ((select === 17 || select === 18) && round !== 0) {
+    } else {
+      setRound(0);
+    }
+  }
   useEffect(() => {
     const fetch = async () => {
       if (select) {
-        if (select === 17 && round === 0) setRound(1);
-        else if (select === 19 && round === 0) setRound(1);
-        else if ((select === 17 || select === 19) && round === 1) setRound(1);
-        else if ((select === 17 || select === 19) && round === 2) setRound(2);
-        else setRound(0);
+        await getRound().then(async () => {
+          const firstData = await supabase
+            .from("winners")
+            .select("*, events(event_name)")
+            .eq("eventid", select)
+            .limit(10);
 
-        const firstData = await supabase
-          .from("winners")
-          .select("*, events(event_name)")
-          .eq("eventid", select)
-          .limit(10);
-
-        const filteredData = firstData.data?.filter((e) => e.round === round);
-        setFirst(filteredData || []);
+          console.log(firstData);
+          const filteredData = firstData.data?.filter((e) => e.round === round);
+          console.log(filteredData);
+          setFirst(filteredData || []);
+        });
       }
     };
     fetch();
@@ -100,7 +106,7 @@ export default function Index() {
                   </p>
                 </div>
                 {(round == 1 || round == 2) &&
-                  (select == 17 || select == 19) && (
+                  (select == 17 || select == 18) && (
                     <div className="flex justify-start mb-3">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -134,7 +140,11 @@ export default function Index() {
 
             <div className="space-y-3">
               {first.map((entry, index) => (
-                <LeaderboardCard key={entry.id} entry={entry} index={index} />
+                <LeaderboardCard
+                  key={entry.id}
+                  entry={entry}
+                  index={index + 1}
+                />
               ))}
             </div>
           </div>
