@@ -101,6 +101,7 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
           {/* Time */}
           <p className="text-gray-500 p-0 m-0 mb-1">Time:</p>
           <Input
+            name="time"
             placeholder="Time (e.g. 12.34)"
             value={time}
             onChange={(e) => setTime(e.target.value)}

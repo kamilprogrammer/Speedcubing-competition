@@ -43,6 +43,14 @@ export default function Competitors() {
         )
         .returns<User[]>();
 
+      data?.forEach((c) => {
+        const seen = new Set();
+        c.solves = c.solves.filter((s) => {
+          const isDuplicate = seen.has(s.event.id);
+          seen.add(s.event.id);
+          return !isDuplicate;
+        });
+      });
       setCompetitors(data ?? []);
 
       if (error) {
