@@ -32,9 +32,9 @@ export default function Hero() {
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                Welcome to Speed-Cubing-Organization! Your one-stop platform to
-                explore the world of speedcubing, We're still in beta, but we're
-                excited to have you on board!
+                {
+                  "Welcome to Speed-Cubing-Organization! Your one-stop platform to explore the world of speedcubing, We're still in beta, but we're excited to have you on board!"
+                }
               </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>

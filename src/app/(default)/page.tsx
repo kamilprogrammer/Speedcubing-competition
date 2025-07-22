@@ -1,6 +1,5 @@
 "use client";
 import Cta from "@/components/sections/Cta";
-import Cube from "@/components/sections/cube";
 import HeroSection from "@/components/sections/HeroSection";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import CustomCursor from "@/components/ui/CustomCursor";
