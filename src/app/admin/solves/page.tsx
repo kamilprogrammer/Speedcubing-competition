@@ -20,14 +20,6 @@ export default function Solves() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSolves, setFilteredSolves] = useState<Solve[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
-  const [sortConfig, setSortConfig] = useState<{
-    key: string;
-    direction: string;
-  }>({
-    key: "",
-    direction: "asc",
-  });
-
   useEffect(() => {
     const fetchSolves = async () => {
       const { data, error } = await supabase
@@ -60,22 +52,6 @@ export default function Solves() {
       (item) => item.events.event_name === eventName
     );
     setFilteredSolves(filtered);
-  };
-
-  const handleSort = (key: string) => {
-    const direction =
-      sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
-    const sorted = [...filteredSolves].sort((a, b) => {
-      if (a[key as keyof Solve] < b[key as keyof Solve])
-        return direction === "asc" ? -1 : 1;
-      if (a[key as keyof Solve] > b[key as keyof Solve])
-        return direction === "asc" ? 1 : -1;
-      return 0;
-    });
-    if (key) {
-      setSortConfig({ key, direction });
-      setFilteredSolves(sorted);
-    }
   };
 
   return (
@@ -175,40 +151,10 @@ export default function Solves() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead
-                onClick={() => handleSort("competitorName")}
-                className="cursor-none"
-              >
-                Competitor{" "}
-                {sortConfig.key === "competitorName"
-                  ? sortConfig.direction === "asc"
-                    ? "🔼"
-                    : "🔽"
-                  : ""}
-              </TableHead>
-              <TableHead
-                onClick={() => handleSort("eventName")}
-                className="cursor-none"
-              >
-                Event{" "}
-                {sortConfig.key === "eventName"
-                  ? sortConfig.direction === "asc"
-                    ? "🔼"
-                    : "🔽"
-                  : ""}
-              </TableHead>
-              <TableHead>Round</TableHead>
-              <TableHead
-                onClick={() => handleSort("time")}
-                className="cursor-none"
-              >
-                Time{" "}
-                {sortConfig.key === "time"
-                  ? sortConfig.direction === "asc"
-                    ? "🔼"
-                    : "🔽"
-                  : ""}
-              </TableHead>
+              <TableHead className="cursor-none">Competitor</TableHead>
+              <TableHead className="cursor-none">Event</TableHead>
+              <TableHead className="cursor-none">Round</TableHead>
+              <TableHead className="cursor-none">Time</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -220,7 +166,11 @@ export default function Solves() {
                 <TableCell>
                   <Badge variant="outline">{solve.events.event_name}</Badge>
                 </TableCell>
-                <TableCell>Round {solve.solveindex}</TableCell>
+                {solve.round !== 0 ? (
+                  <TableCell>Round {solve.round}</TableCell>
+                ) : (
+                  <TableCell>---</TableCell>
+                )}
                 <TableCell className="font-mono">{solve.time}</TableCell>
               </TableRow>
             ))}
