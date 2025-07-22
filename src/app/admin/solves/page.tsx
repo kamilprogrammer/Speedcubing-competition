@@ -13,19 +13,23 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import supabase from "@/app/supabase-client";
-import { Solve } from "@/app/types";
+import { Solve, Event } from "@/app/types";
 
 export default function Solves() {
   const [solves, setSolves] = useState<Solve[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSolves, setFilteredSolves] = useState<Solve[]>([]);
-  const [sortConfig, setSortConfig] = useState<{ key: string; direction: string }>({
+  const [events, setEvents] = useState<Event[]>([]);
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: string;
+  }>({
     key: "",
     direction: "asc",
   });
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchSolves = async () => {
       const { data, error } = await supabase
         .from("solves")
         .select("*, events(event_name), users(username)");
@@ -34,11 +38,21 @@ export default function Solves() {
         console.error("Error fetching users:", error);
         return;
       }
+      console.log(data);
       setSolves(data as Solve[]);
-      setFilteredSolves(data)
+      setFilteredSolves(data);
     };
-    fetch()
-        
+    fetchSolves();
+    const fetchEvents = async () => {
+      const { data, error } = await supabase.from("events").select("*");
+      if (error) {
+        console.error("Error fetching events:", error);
+        return;
+      }
+      console.log(data);
+      setEvents(data as Event[]);
+    };
+    fetchEvents();
   }, []);
 
   const handleFilter = (eventName: string) => {
@@ -52,8 +66,10 @@ export default function Solves() {
     const direction =
       sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
     const sorted = [...filteredSolves].sort((a, b) => {
-      if (a[key as keyof Solve] < b[key as keyof Solve]) return direction === "asc" ? -1 : 1;
-      if (a[key as keyof Solve] > b[key as keyof Solve]) return direction === "asc" ? 1 : -1;
+      if (a[key as keyof Solve] < b[key as keyof Solve])
+        return direction === "asc" ? -1 : 1;
+      if (a[key as keyof Solve] > b[key as keyof Solve])
+        return direction === "asc" ? 1 : -1;
       return 0;
     });
     if (key) {
@@ -95,18 +111,18 @@ export default function Solves() {
               }}
             />
           </div>
-          {solves.map((event) => (
+          {events.map((event) => (
             <Button
               key={event.id}
               variant="outline"
               size="sm"
               onClick={() => {
                 setSearchTerm("");
-                handleFilter(event.events.event_name);
+                handleFilter(event.event_name);
               }}
               className="cursor-none"
             >
-              {event.events.event_name}
+              {event.event_name}
             </Button>
           ))}
           <Button
