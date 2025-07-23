@@ -41,7 +41,7 @@ export default function Index() {
             .from("winners")
             .select("*, events(event_name)")
             .eq("eventid", select)
-            .limit(10);
+            .limit(round === 1 ? 10 : 3);
 
           console.log(firstData);
           const filteredData = firstData.data?.filter((e) => e.round === round);
