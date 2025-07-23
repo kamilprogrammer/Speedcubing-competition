@@ -33,7 +33,6 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
   );
   const [eventId, setEventId] = useState("");
   const [time, setTime] = useState("");
-  const [solveIndex, setSolveIndex] = useState<number>(1);
   const [round, setRound] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -52,9 +51,9 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
   useEffect(() => {
     if (open == false) {
       setTime("");
-      setSolveIndex(1);
       setRound(0);
       setEventId("");
+      setError(null);
     }
   }, [open]);
 
@@ -68,10 +67,10 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
         time,
         userid: user.id,
         eventid: Number(eventId),
-        solveindex: solveIndex,
         round: round,
       },
     ]);
+    console.log({ time, eventId, round, user });
 
     setLoading(false);
 
@@ -80,7 +79,6 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
     } else {
       // Reset and close
       setTime("");
-      setSolveIndex(1);
       setRound(0);
       setEventId("");
       setOpen(false);
@@ -101,20 +99,10 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
           {/* Time */}
           <p className="text-gray-500 p-0 m-0 mb-1">Time:</p>
           <Input
+            name="time"
             placeholder="Time (e.g. 12.34)"
             value={time}
             onChange={(e) => setTime(e.target.value)}
-            className="bg-[#1a1a1d] text-white border-gray-700"
-            required
-          />
-
-          {/* Solve Index */}
-          <p className="text-gray-500 p-0 m-0 mb-1">Solve Index:</p>
-          <Input
-            placeholder="Solve Index"
-            type="number"
-            value={solveIndex}
-            onChange={(e) => setSolveIndex(Number(e.target.value))}
             className="bg-[#1a1a1d] text-white border-gray-700"
             required
           />

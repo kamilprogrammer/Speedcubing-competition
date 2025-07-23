@@ -50,7 +50,7 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
     }
   };
 
-  const styles = getRankStyles(entry.top);
+  const styles = getRankStyles(index);
 
   return (
     <div
@@ -69,7 +69,7 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
             styles.rank
           )}
         >
-          {entry.top}
+          {index}
         </div>
 
         {/* Avatar */}
@@ -85,18 +85,21 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
         {/* User Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            {getRankIcon(entry.top)}
+            {getRankIcon(index)}
             <h3 className="text-lg font-bold text-white truncate">
               {entry.username}
             </h3>
           </div>
           <div className="flex items-center gap-4 text-sm text-slate-400">
-            <div className="flex items-center gap-1">
-              <Target className="w-4 h-4" />
-              <span className="font-semibold text-slate-300">
-                {entry.score.toLocaleString()}
-              </span>
-            </div>
+            {entry.score !== 0 && (
+              <div className="flex items-center gap-1">
+                <Target className="w-4 h-4" />
+                <span className="font-semibold text-slate-300">
+                  {entry.score.toLocaleString()}
+                </span>
+              </div>
+            )}
+
             <div className="flex items-center gap-1">
               <Clock className="w-4 h-4" />
               <span className="text-slate-400">{entry.best_solve + "s"}</span>
@@ -105,7 +108,7 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
         </div>
 
         {/* Mobile rank indicator */}
-        <div className="sm:hidden">{getRankIcon(entry.top)}</div>
+        <div className="sm:hidden">{getRankIcon(index)}</div>
       </div>
 
       {/* Shine effect for top 3 */}
