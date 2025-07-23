@@ -28,12 +28,12 @@ export default function Hero() {
             </h1>
             <div className="mx-auto max-w-3xl">
               <p
-                className="mb-8 text-xl text-indigo-200/65 font-cairo"
+                className="mb-8 text-lg text-indigo-200/65 font-cairo"
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
                 {
-                  "يسعدنا أن تكونوا جزءًا من أول بطولة رسمية لحل المكعب في سوريا، المُقامة في مدينة حمص يومي 16 و17 أغسطس"
+                  "\n!يسعدنا أن تكونوا جزءًا من أول بطولة رسمية لحل المكعب في سوريا، المُقامة في مدينة حمص يومي 16 و17 أغسطس \n تابعوا تقدمكم، شجّعوا أصدقاءكم، وشاركونا صناعة تاريخ جديد للسرعة والإبداع في سوريا"
                 }
               </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">

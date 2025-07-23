@@ -50,7 +50,7 @@ export default function Index() {
       setRound(0);
     }
   }
-  const fetchLeaderboard = async () => {
+  const fetchLeaderboard = async (select: number, round: number) => {
     if (!select) return;
 
     await getRound().then(async () => {
@@ -74,14 +74,14 @@ export default function Index() {
   };
 
   useEffect(() => {
-    fetchLeaderboard();
+    fetchLeaderboard(select, round);
 
     const interval = setInterval(() => {
-      fetchLeaderboard();
+      fetchLeaderboard(select, round);
     }, 2000);
 
     return () => clearInterval(interval);
-  });
+  }, [select, round]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#030712] to-slate-800 relative">
