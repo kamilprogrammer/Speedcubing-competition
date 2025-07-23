@@ -32,7 +32,6 @@ export type Database = {
           created_at: string;
           eventid: number;
           id: number;
-          solveindex: number | null;
           time: string;
           userid: number;
         };
@@ -40,7 +39,6 @@ export type Database = {
           created_at?: string;
           eventid: number;
           id?: number;
-          solveindex?: number | null;
           time: string;
           userid: number;
         };
@@ -48,7 +46,6 @@ export type Database = {
           created_at?: string;
           eventid?: number;
           id?: number;
-          solveindex?: number | null;
           time?: string;
           userid?: number;
         };
