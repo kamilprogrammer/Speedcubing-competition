@@ -103,7 +103,7 @@ export default function Index() {
         {/* Event Tabs */}
 
         <div
-          className="mb-8 animate-slide-up cursor-none"
+          className="mb-4 animate-slide-up cursor-none"
           style={{ animationDelay: "100ms" }}
         >
           <div className="mb-2">
@@ -138,67 +138,70 @@ export default function Index() {
         </div>
 
         {/* Leaderboard Container */}
-        <div className="animate-slide-up" style={{ animationDelay: "200ms" }}>
-          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 md:p-8 shadow-2xl">
-            {/* Current Event Header */}
-            {select && (
-              <>
-                <div className="mb-2 text-center">
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-1">
-                    {events.find((e) => e.id === select)?.event_name} Event
-                    {round === 1
-                      ? " - Round #1"
-                      : round === 2
-                      ? " - Round #2"
-                      : ""}
-                  </h2>
-                  <p className="text-slate-400">Top {round === 1 ? 10 : 3}</p>
-                </div>
-                {(round == 1 || round == 2) &&
-                  (select == 17 || select == 18) && (
-                    <div className="flex justify-start mb-3">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button className="cursor-none" variant="secondary">
-                            {round === 1
-                              ? "Round 1"
-                              : round === 2
-                              ? "Round 2"
-                              : ""}
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="cursor-none">
-                          <DropdownMenuItem
-                            className="cursor-none"
-                            onClick={() => setRound(1)}
-                          >
-                            Round 1
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            className="cursor-none"
-                            onClick={() => setRound(2)}
-                          >
-                            Round 2
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  )}
-              </>
-            )}
+        {select !== 0 && (
+          <div className="animate-slide-up" style={{ animationDelay: "200ms" }}>
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 md:p-8 shadow-2xl">
+              {/* Current Event Header */}
+              {select && (
+                <>
+                  <div className="mb-2 text-center">
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-1">
+                      {events.find((e) => e.id === select)?.event_name} Event
+                      {round !== 0 &&
+                        (round === 1
+                          ? " - Round #1"
+                          : round === 2
+                          ? " - Round #2"
+                          : "")}
+                    </h2>
+                    <p className="text-slate-400">Top {round === 1 ? 10 : 3}</p>
+                  </div>
+                  {(round == 1 || round == 2) &&
+                    (select == 17 || select == 18) && (
+                      <div className="flex justify-start mb-3">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button className="cursor-none" variant="secondary">
+                              {round === 1
+                                ? "Round 1"
+                                : round === 2
+                                ? "Round 2"
+                                : ""}
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="cursor-none">
+                            <DropdownMenuItem
+                              className="cursor-none"
+                              onClick={() => setRound(1)}
+                            >
+                              Round 1
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              className="cursor-none"
+                              onClick={() => setRound(2)}
+                            >
+                              Round 2
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    )}
+                </>
+              )}
 
-            <div className="space-y-3">
-              {first.map((entry, index) => (
-                <LeaderboardCard
-                  key={entry.id}
-                  entry={entry}
-                  index={index + 1}
-                />
-              ))}
+              <div className="space-y-3">
+                {first.length > 0 &&
+                  first.map((entry, index) => (
+                    <LeaderboardCard
+                      key={entry.id}
+                      entry={entry}
+                      index={index + 1}
+                    />
+                  ))}
+              </div>
             </div>
           </div>
-        </div>
-
+        )}
         {/* Footer */}
         <div
           className="text-center mt-8 text-slate-500 animate-fade-in"

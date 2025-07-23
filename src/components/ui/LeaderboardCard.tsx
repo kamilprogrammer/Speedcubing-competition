@@ -92,7 +92,9 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
 
             <div className="flex items-center gap-1">
               <Clock className="w-4 h-4" />
-              <span className="text-slate-400">{entry.best_solve + "s"}</span>
+              <span className="text-slate-400">
+                {entry.best_solve ? entry.best_solve + "s" : "N/A"}
+              </span>
             </div>
           </div>
         </div>
