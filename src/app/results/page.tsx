@@ -81,7 +81,7 @@ export default function Index() {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [select, round]);
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#030712] to-slate-800 relative">

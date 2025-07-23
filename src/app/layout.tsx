@@ -20,6 +20,7 @@ const cairo = localFont({
   variable: "--font-cairo",
   display: "swap",
 });
+console.log(cairo);
 
 const inter = Inter({
   subsets: ["latin"],
