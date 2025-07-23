@@ -60,17 +60,19 @@ export default function Hero() {
                 </div>
               </div>
               <Badge
-                data-aos="fade-up"
-                data-aos-delay={400}
                 className={`w-[200px] mt-6 p-2 text-white ${
-                  status === "Finished" ? "bg-green-500" : ""
+                  status === "Finished"
+                    ? " bg-green-500"
+                    : status === "Not Started Yet!"
+                    ? "bg-red-500"
+                    : "bg-yellow-500"
                 }`}
                 variant={
                   status === "Finished"
                     ? "outline"
                     : status === "Not Started Yet!"
                     ? "destructive"
-                    : "destructive"
+                    : "outline"
                 }
               >
                 {status}

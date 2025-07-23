@@ -17,14 +17,31 @@ export default function Index() {
   const [events, setEvents] = useState<EventLeaderboard[]>([]);
   const [select, setSelect] = useState(0);
   const [round, setRound] = useState<number>(0);
+  const [day, setDay] = useState<number>(1);
   const [first, setFirst] = useState<any[]>([]);
   useEffect(() => {
     const fetch = async () => {
       const data = (await supabase.from("events").select("*")).data;
-      setEvents(data || []);
+      const days_filterd = data?.map((event) => {
+        if (
+          event.id === 17 ||
+          event.id === 18 ||
+          event.id === 19 ||
+          event.id === 28
+        ) {
+          return { ...event, day: 1 };
+        } else {
+          return { ...event, day: 2 };
+        }
+      });
+      if (day === 1) {
+        setEvents(days_filterd?.filter((event) => event.day === 1) || []);
+      } else if (day === 2) {
+        setEvents(days_filterd?.filter((event) => event.day === 2) || []);
+      }
     };
     fetch();
-  }, []);
+  }, [day]);
   async function getRound() {
     if ((select === 17 || select === 18) && round === 0) {
       setRound(1);
@@ -33,25 +50,35 @@ export default function Index() {
       setRound(0);
     }
   }
-  useEffect(() => {
-    const fetch = async () => {
-      if (select) {
-        await getRound().then(async () => {
-          const firstData = await supabase
-            .from("winners")
-            .select("*, events(event_name)")
-            .eq("eventid", select)
-            .limit(round === 1 ? 10 : 3);
+  const fetchLeaderboard = async () => {
+    if (!select) return;
 
-          console.log(firstData);
-          const filteredData = firstData.data?.filter((e) => e.round === round);
-          console.log(filteredData);
-          setFirst(filteredData || []);
-        });
+    await getRound().then(async () => {
+      const { data, error } = await supabase
+        .from("winners")
+        .select("*, events(event_name)")
+        .eq("eventid", select)
+        .eq("round", round)
+        .limit(round === 1 ? 10 : 3);
+
+      if (error) {
+        console.error("Error fetching leaderboard:", error);
+      } else {
+        setFirst(data || []);
       }
-    };
-    fetch();
+    });
+  };
+
+  useEffect(() => {
+    fetchLeaderboard(); // initial fetch
+
+    const interval = setInterval(() => {
+      fetchLeaderboard();
+    }, 3000); // poll every 3 seconds
+
+    return () => clearInterval(interval); // cleanup on unmount or dependencies change
   }, [select, round]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#030712] via-[#030712] to-slate-800 relative">
       {/* Subtle background pattern */}
@@ -60,7 +87,7 @@ export default function Index() {
       <div className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in">
-          <div className="flex items-center justify-center gap-3 mb-6">
+          <div className="flex items-center justify-center gap-2 mb-3">
             <div className="p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
               <Trophy className="w-8 h-8 text-orange-500" />
             </div>
@@ -74,10 +101,34 @@ export default function Index() {
         </div>
 
         {/* Event Tabs */}
+
         <div
           className="mb-8 animate-slide-up cursor-none"
           style={{ animationDelay: "100ms" }}
         >
+          <div className="mb-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className="cursor-none" variant="secondary">
+                  {day === 1 ? "Day 01" : day === 2 ? "Day 02" : ""}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="cursor-none">
+                <DropdownMenuItem
+                  className="cursor-none"
+                  onClick={() => setDay(1)}
+                >
+                  Day 01
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="cursor-none"
+                  onClick={() => setDay(2)}
+                >
+                  Day 02
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <EventTabs
             events={events}
             selectedEvent={select}
@@ -101,9 +152,7 @@ export default function Index() {
                       ? " - Round #2"
                       : ""}
                   </h2>
-                  <p className="text-slate-400">
-                    Top {round === 1 ? 10 : 3} Leaders
-                  </p>
+                  <p className="text-slate-400">Top {round === 1 ? 10 : 3}</p>
                 </div>
                 {(round == 1 || round == 2) &&
                   (select == 17 || select == 18) && (

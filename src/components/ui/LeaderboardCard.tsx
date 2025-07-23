@@ -72,16 +72,6 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
           {index}
         </div>
 
-        {/* Avatar */}
-        <div
-          className={cn(
-            "flex items-center justify-center w-12 h-12 rounded-full text-md font-bold shadow-lg transition-transform group-hover:scale-110",
-            styles.avatar
-          )}
-        >
-          {entry.username[0]}
-        </div>
-
         {/* User Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
