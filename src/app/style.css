@@ -226,3 +226,16 @@
 body {
   cursor: none;
 }
+
+@font-face {
+  font-family: "cairo";
+  src: url("/fonts/cairo.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "cairoBold";
+  src: url("/fonts/cairo-bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}

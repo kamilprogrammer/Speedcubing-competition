@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 export default function SignIn() {
   const router = useRouter();
   const password = process.env.NEXT_PUBLIC_SECRET_KEY;
-  console.log(password);
   return (
     <section className="">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -41,9 +40,6 @@ export default function SignIn() {
                 const passwordInput = form.elements.namedItem(
                   "password"
                 ) as HTMLInputElement;
-                console.log(passwordInput.value);
-                console.log(password);
-                console.log(password === passwordInput.value);
                 if (
                   emailInput &&
                   emailInput.value === "admin@gmail.com" &&

@@ -8,17 +8,17 @@ export default function Home() {
   const testimonials = [
     {
       quote:
-        "Hey Nihad, I really don't know what to write here. So you better tell what you wanna write before deployment, Or I'll push this and everybody can see it :)",
+        "شغوف بعالم حل مكعب الروبيك وممثل عن مجتمع الشرق الأوسط، والمُنظم الرئيسي لأول بطولة رسمية في البلاد، بفضل جهوده، بدأت رياضة حل المكعب تجد مكانها في سوريا",
       name: "Nihad AlSoufi",
-      designation: "Fastest Syrian Cuber",
+      designation: "Founder of SSCO",
       src: "/images/Nihad.png",
     },
 
     {
       quote:
-        "Hey Mahmoud, I really don't know what to write here. So you better tell what you wanna write before deployment, Or I'll push this and everybody can see it :)",
+        "لاعب مكعب متميز و دوره بارز في المجتمع ، يُعد الشريك المؤسس لمجتمع المكعب السوري، ساهم بشكل فعّال في بناء هذا المجتمع منذ بدايته، وكان له دور كبير في دعم وتنظيم أول بطولة رسمية في سوريا",
       name: "Mahmoud Sras",
-      designation: "Also Fastest Syrian Cuber",
+      designation: "Co-Founder of SSCO",
       src: "/images/Mahmoud.jpg",
     },
   ];

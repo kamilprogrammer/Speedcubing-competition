@@ -4,6 +4,24 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import HeaderWrap from "./HeaderWrap";
 
+const cairo = localFont({
+  src: [
+    {
+      path: "..//..//public/fonts/cairo.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "..//..//public/fonts/cairo-bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-cairo",
+  display: "swap",
+});
+console.log(cairo);
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -54,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}
+        className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-cairo text-base text-gray-200 antialiased`}
       >
         <HeaderWrap />
         <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">

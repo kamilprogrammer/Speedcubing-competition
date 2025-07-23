@@ -35,8 +35,8 @@ export const AnimatedTestimonials = ({
 
   useEffect(() => {
     const handleNext = () => {
-    setActive((prev) => (prev + 1) % testimonials.length);
-  };
+      setActive((prev) => (prev + 1) % testimonials.length);
+    };
     if (autoplay) {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
@@ -47,7 +47,7 @@ export const AnimatedTestimonials = ({
     return Math.floor(Math.random() * 21) - 10;
   };
   return (
-    <div className="mx-auto max-w-sm px-4 pb-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
+    <div className="mx-auto max-w-sm px-4 pb-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12 -mt-20">
       <div className="translate-x-1/4 -z-10 -translate-y-[300px] mr-40">
         <IllRight small={true} height={1150} width={1150} right={true} />
       </div>
@@ -133,7 +133,7 @@ export const AnimatedTestimonials = ({
             <p className="text-sm text-neutral-500">
               {testimonials[active].designation}
             </p>
-            <motion.p className="mt-8 text-lg text-neutral-300">
+            <motion.p dir="rtl" className="mt-8 text-lg text-neutral-300">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -154,7 +154,7 @@ export const AnimatedTestimonials = ({
                   }}
                   className="inline-block"
                 >
-                  {word}&nbsp;
+                  &nbsp;{word}
                 </motion.span>
               ))}
             </motion.p>

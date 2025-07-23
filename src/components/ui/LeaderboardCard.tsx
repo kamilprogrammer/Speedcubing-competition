@@ -1,5 +1,5 @@
 import { winner } from "../../app/types";
-import { Crown, Medal, Award, Trophy, Clock, Target } from "lucide-react";
+import { Crown, Medal, Award, Trophy, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface LeaderboardCardProps {
@@ -72,16 +72,6 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
           {index}
         </div>
 
-        {/* Avatar */}
-        <div
-          className={cn(
-            "flex items-center justify-center w-12 h-12 rounded-full text-md font-bold shadow-lg transition-transform group-hover:scale-110",
-            styles.avatar
-          )}
-        >
-          {entry.username[0]}
-        </div>
-
         {/* User Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
@@ -91,28 +81,36 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
             </h3>
           </div>
           <div className="flex items-center gap-4 text-sm text-slate-400">
-            {entry.score !== 0 && (
+            <div className="flex items-center gap-1">
+              <Clock className="w-4 h-4" />
+              <span className="text-slate-300">
+                {entry.average_time ? entry.average_time + "s" : "N/A"}
+              </span>
+            </div>
+
+            {entry.best_solve !== "" && (
               <div className="flex items-center gap-1">
-                <Target className="w-4 h-4" />
+                <p className="font-light text-slate-300">best: </p>
                 <span className="font-semibold text-slate-300">
-                  {entry.score.toLocaleString()}
+                  {entry.best_solve}
                 </span>
               </div>
             )}
 
             <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
-              <span className="text-slate-400">{entry.best_solve + "s"}</span>
+              <p className="font-light text-slate-300">solves:</p>
+              <span className="font-normal text-slate-300">
+                {entry.solves.map((solve, i) => {
+                  return solve + (entry.solves.length !== i + 1 ? ", " : "");
+                })}
+              </span>
             </div>
           </div>
         </div>
-
-        {/* Mobile rank indicator */}
-        <div className="sm:hidden">{getRankIcon(index)}</div>
       </div>
 
       {/* Shine effect for top 3 */}
-      {entry.top <= 3 && (
+      {index <= 3 && (
         <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       )}
     </div>

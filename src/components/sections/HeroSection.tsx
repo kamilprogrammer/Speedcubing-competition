@@ -18,22 +18,22 @@ export default function Hero() {
         {/* Hero content */}
         <div className="py-12 md:py-20">
           {/* Section header */}
-          <div className="absolute inset-0 -z-10 h-[648px] sm:h-[648px] md:h-[800px] lg:h-[1008px] w-full bg-white [background:radial-gradient(140%_90%_at_50%_0%,#030712_40%,#FF6500_140%)]"></div>
+          <div className="absolute inset-0 -z-10 h-[648px] sm:h-[648px] md:h-[800px] lg:h-[1018px] w-full bg-white [background:radial-gradient(140%_90%_at_50%_0%,#030712_40%,#FF6500_140%)]"></div>
           <div className="pb-12 text-center items-center justify-center md:pb-20">
             <h1
               className="animate-[gradient_8s_linear_infinite] bg-[linear-gradient(to_right,var(--color-orange-500),var(--color-gray-50))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl"
               data-aos="fade-up"
             >
-              SpeedCubing Got Prime!{" "}
+              Syria Speedcubing Open 2025{" "}
             </h1>
             <div className="mx-auto max-w-3xl">
               <p
-                className="mb-8 text-xl text-indigo-200/65"
+                className="mb-8 text-xl text-indigo-200/65 font-cairo"
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
                 {
-                  "Welcome to Speed-Cubing-Organization! Your one-stop platform to explore the world of speedcubing, We're still in beta, but we're excited to have you on board!"
+                  "يسعدنا أن تكونوا جزءًا من أول بطولة رسمية لحل المكعب في سوريا، المُقامة في مدينة حمص يومي 16 و17 أغسطس"
                 }
               </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
@@ -60,17 +60,19 @@ export default function Hero() {
                 </div>
               </div>
               <Badge
-                data-aos="fade-up"
-                data-aos-delay={400}
                 className={`w-[200px] mt-6 p-2 text-white ${
-                  status === "Finished" ? "bg-green-500" : ""
+                  status === "Finished"
+                    ? " bg-green-500"
+                    : status === "Not Started Yet!"
+                    ? "bg-red-500"
+                    : "bg-yellow-500"
                 }`}
                 variant={
                   status === "Finished"
                     ? "outline"
                     : status === "Not Started Yet!"
                     ? "destructive"
-                    : "destructive"
+                    : "outline"
                 }
               >
                 {status}

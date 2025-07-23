@@ -30,7 +30,7 @@ export default function ModalPdf({
 
       {/* Video thumbnail */}
       <button
-        className="group cursor-none  relative flex items-center justify-center rounded-2xl focus:outline-hidden focus-visible:ring-3 focus-visible:ring-indigo-200"
+        className="group cursor-none relative flex items-center justify-center rounded-2xl focus:outline-hidden focus-visible:ring-3 focus-visible:ring-indigo-200"
         onClick={() => {
           if (isMobile) {
             window.open(pdf, "_blank");
@@ -42,8 +42,24 @@ export default function ModalPdf({
         data-aos="fade-up"
         data-aos-delay={200}
       >
-        <figure className="relative overflow-hidden rounded-2xl before:absolute before:inset-0 before:-z-10 before:bg-linear-to-br before:from-gray-900 before:via-indigo-500/20 before:to-gray-900">
+        <figure
+          onClick={() => {
+            if (isMobile) {
+              window.open(pdf, "_blank");
+            } else {
+              setModalOpen(true);
+            }
+          }}
+          className="relative overflow-hidden rounded-2xl before:absolute before:inset-0 before:-z-10 before:bg-linear-to-br before:from-gray-900 before:via-indigo-500/20 before:to-gray-900"
+        >
           <Image
+            onClick={() => {
+              if (isMobile) {
+                window.open(pdf, "_blank");
+              } else {
+                setModalOpen(true);
+              }
+            }}
             className="opacity-50 grayscale"
             src={thumb}
             width={thumbWidth}
@@ -53,7 +69,16 @@ export default function ModalPdf({
           />
         </figure>
         {/* Play icon */}
-        <span className="pointer-events-none absolute p-2.5 before:absolute before:inset-0 before:rounded-full before:bg-gray-950 before:duration-300 group-hover:before:scale-110">
+        <span
+          onClick={() => {
+            if (isMobile) {
+              window.open(pdf, "_blank");
+            } else {
+              setModalOpen(true);
+            }
+          }}
+          className="pointer-events-none absolute p-2.5 before:absolute before:inset-0 before:rounded-full before:bg-gray-950 before:duration-300 group-hover:before:scale-110"
+        >
           <span className="relative flex items-center gap-3">
             <span className="relative inline-block w-6 h-6 bg-gray-600 rounded-lg">
               <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[0.825rem] font-bold leading-none text-white">
