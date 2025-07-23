@@ -12,6 +12,8 @@ const config: Config = {
       fontFamily: {
         inter: ["var(--font-inter)"],
         nacelle: ["var(--font-nacelle)"],
+        cairo: ["var(--font-cairo)"],
+        "cairo-bold": ["var(--font-cairo-bold)"],
       },
       colors: {
         background: "var(--background)",
