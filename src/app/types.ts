@@ -33,6 +33,8 @@ export interface winner {
   id: number;
   username: string;
   best_solve: string;
+  solves: string[];
+  average_time: string;
   event_name: string;
   top: number;
   score: number;

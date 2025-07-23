@@ -64,19 +64,23 @@ export default function Index() {
       if (error) {
         console.error("Error fetching leaderboard:", error);
       } else {
-        setFirst(data || []);
+        const filteredData = data.filter(
+          (entry) => entry.average_time !== null
+        );
+        console.log(filteredData);
+        setFirst(filteredData || []);
       }
     });
   };
 
   useEffect(() => {
-    fetchLeaderboard(); // initial fetch
+    fetchLeaderboard();
 
     const interval = setInterval(() => {
       fetchLeaderboard();
-    }, 3000); // poll every 3 seconds
+    }, 2000);
 
-    return () => clearInterval(interval); // cleanup on unmount or dependencies change
+    return () => clearInterval(interval);
   }, [select, round]);
 
   return (
@@ -191,13 +195,15 @@ export default function Index() {
 
               <div className="space-y-3">
                 {first.length > 0 &&
-                  first.map((entry, index) => (
-                    <LeaderboardCard
-                      key={entry.id}
-                      entry={entry}
-                      index={index + 1}
-                    />
-                  ))}
+                  first.map((entry, index) => {
+                    return (
+                      <LeaderboardCard
+                        key={entry.id}
+                        entry={entry}
+                        index={index + 1}
+                      />
+                    );
+                  })}
               </div>
             </div>
           </div>
