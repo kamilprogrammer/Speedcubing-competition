@@ -14,12 +14,19 @@ import {
 import { Button } from "@/components/ui/button";
 import supabase from "@/app/supabase-client";
 import { Solve, Event } from "@/app/types";
-
+import { useRouter } from "next/navigation";
 export default function Solves() {
   const [solves, setSolves] = useState<Solve[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSolves, setFilteredSolves] = useState<Solve[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
+  const router = useRouter();
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      router.replace("/not-authorized");
+    }
+  }, [router]);
   useEffect(() => {
     const fetchSolves = async () => {
       const { data, error } = await supabase

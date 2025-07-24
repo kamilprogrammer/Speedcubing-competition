@@ -10,7 +10,7 @@ export default function Home() {
       quote:
         "شغوف بعالم حل مكعب الروبيك وممثل عن مجتمع الشرق الأوسط، والمُنظم الرئيسي لأول بطولة رسمية في البلاد، بفضل جهوده، بدأت رياضة حل المكعب تجد مكانها في سوريا",
       name: "Nihad AlSoufi",
-      designation: "Founder of SSCO",
+      designation: "Founder of SSCC",
       src: "/images/Nihad.png",
     },
 
@@ -18,7 +18,7 @@ export default function Home() {
       quote:
         "لاعب مكعب متميز و دوره بارز في المجتمع ، يُعد الشريك المؤسس لمجتمع المكعب السوري، ساهم بشكل فعّال في بناء هذا المجتمع منذ بدايته، وكان له دور كبير في دعم وتنظيم أول بطولة رسمية في سوريا",
       name: "Mahmoud Sras",
-      designation: "Co-Founder of SSCO",
+      designation: "Co-Founder of SSCC",
       src: "/images/Mahmoud.jpg",
     },
   ];

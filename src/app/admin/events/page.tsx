@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -6,9 +5,16 @@ import { Card, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import supabase from "@/app/supabase-client";
 import { Button } from "@/components/ui/button";
-
+import { useRouter } from "next/navigation";
 export default function Events() {
   const [events, setEvents] = useState<any[]>([]);
+  const router = useRouter();
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      router.replace("/not-authorized");
+    }
+  }, [router]);
 
   const deleteEvent = async (eventId: number) => {
     const { error } = await supabase.from("events").delete().eq("id", eventId);
