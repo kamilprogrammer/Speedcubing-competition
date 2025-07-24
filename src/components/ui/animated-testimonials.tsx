@@ -38,7 +38,7 @@ export const AnimatedTestimonials = ({
       setActive((prev) => (prev + 1) % testimonials.length);
     };
     if (autoplay) {
-      const interval = setInterval(handleNext, 5000);
+      const interval = setInterval(handleNext, 9000);
       return () => clearInterval(interval);
     }
   }, [autoplay, testimonials]);

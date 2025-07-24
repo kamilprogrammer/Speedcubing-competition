@@ -33,6 +33,10 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
   );
   const [eventId, setEventId] = useState("");
   const [time, setTime] = useState("");
+  const [time2, setTime2] = useState("");
+  const [time3, setTime3] = useState("");
+  const [time4, setTime4] = useState("");
+  const [time5, setTime5] = useState("");
   const [round, setRound] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -70,15 +74,57 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
         round: round,
       },
     ]);
-    console.log({ time, eventId, round, user });
+    const solve2 = await supabase.from("solves").insert([
+      {
+        time: time2,
+        userid: user.id,
+        eventid: Number(eventId),
+        round: round,
+      },
+    ]);
+    const solve3 = await supabase.from("solves").insert([
+      {
+        time: time3,
+        userid: user.id,
+        eventid: Number(eventId),
+        round: round,
+      },
+    ]);
+    const solve4 = await supabase.from("solves").insert([
+      {
+        time: time4,
+        userid: user.id,
+        eventid: Number(eventId),
+        round: round,
+      },
+    ]);
+    const solve5 = await supabase.from("solves").insert([
+      {
+        time: time5,
+        userid: user.id,
+        eventid: Number(eventId),
+        round: round,
+      },
+    ]);
 
     setLoading(false);
 
-    if (error) {
-      setError(error.message);
+    if (error || solve2.error || solve3.error || solve4.error || solve5.error) {
+      setError(
+        (error?.message ||
+          solve2.error?.message ||
+          solve3.error?.message ||
+          solve4.error?.message ||
+          solve5.error?.message) ??
+          null
+      );
     } else {
       // Reset and close
       setTime("");
+      setTime2("");
+      setTime3("");
+      setTime4("");
+      setTime5("");
       setRound(0);
       setEventId("");
       setOpen(false);
@@ -103,6 +149,42 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
             placeholder="Time (e.g. 12.34)"
             value={time}
             onChange={(e) => setTime(e.target.value)}
+            className="bg-[#1a1a1d] text-white border-gray-700"
+            required
+          />
+          <p className="text-gray-500 p-0 m-0 mb-1">Time2:</p>
+          <Input
+            name="time2"
+            placeholder="Time (e.g. 12.34)"
+            value={time2}
+            onChange={(e) => setTime2(e.target.value)}
+            className="bg-[#1a1a1d] text-white border-gray-700"
+            required
+          />
+          <p className="text-gray-500 p-0 m-0 mb-1">Time3:</p>
+          <Input
+            name="time3"
+            placeholder="Time (e.g. 12.34)"
+            value={time3}
+            onChange={(e) => setTime3(e.target.value)}
+            className="bg-[#1a1a1d] text-white border-gray-700"
+            required
+          />
+          <p className="text-gray-500 p-0 m-0 mb-1">Time4:</p>
+          <Input
+            name="time4"
+            placeholder="Time (e.g. 12.34)"
+            value={time4}
+            onChange={(e) => setTime4(e.target.value)}
+            className="bg-[#1a1a1d] text-white border-gray-700"
+            required
+          />
+          <p className="text-gray-500 p-0 m-0 mb-1">Time5:</p>
+          <Input
+            name="time5"
+            placeholder="Time (e.g. 12.34)"
+            value={time5}
+            onChange={(e) => setTime5(e.target.value)}
             className="bg-[#1a1a1d] text-white border-gray-700"
             required
           />

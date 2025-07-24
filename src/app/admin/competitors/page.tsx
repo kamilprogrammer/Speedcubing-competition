@@ -17,14 +17,20 @@ import {
 } from "@/components/ui/table";
 import supabase from "@/app/supabase-client";
 import { User } from "@/app/types";
-
+import { useRouter } from "next/navigation";
 export default function Competitors() {
   const [open, setOpen] = useState(false);
   const [solveopen, setSolveOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [competitors, setCompetitors] = useState<User[]>([]);
   const [selected, setSelected] = useState<User | null>(null);
-
+  const router = useRouter();
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      router.replace("/not-authorized");
+    }
+  }, [router]);
   useEffect(() => {
     const fetch = async () => {
       const { data, error } = await supabase
