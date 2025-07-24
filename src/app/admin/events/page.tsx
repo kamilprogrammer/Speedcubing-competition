@@ -6,8 +6,9 @@ import { useState, useEffect } from "react";
 import supabase from "@/app/supabase-client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Event } from "@/app/types";
 export default function Events() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const router = useRouter();
   useEffect(() => {
     const role = localStorage.getItem("role");
