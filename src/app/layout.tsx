@@ -3,6 +3,7 @@ import "./style.css";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import HeaderWrap from "./HeaderWrap";
+import Analytics from "./analytics";
 
 const cairo = localFont({
   src: [
@@ -66,6 +67,7 @@ export const metadata = {
     google: "WCBTADGkk1aE4gdEWk4b8DxuoOKOfKVe45nFg2Br8y8",
   },
 };
+const GA_MEASUREMENT_ID = "G-34N366FFCJ";
 
 export default function RootLayout({
   children,
@@ -79,11 +81,26 @@ export default function RootLayout({
           name="google-site-verification"
           content="XO3Rsmwi7-TKYfGuTBoeA8UML0X8wwW4lHF2vwN-WYQ"
         />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-34N366FFCJ"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-cairo text-base text-gray-200 antialiased`}
       >
         <HeaderWrap />
+        <Analytics />
         <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
           {children}
         </div>
