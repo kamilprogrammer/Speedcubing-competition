@@ -74,6 +74,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="XO3Rsmwi7-TKYfGuTBoeA8UML0X8wwW4lHF2vwN-WYQ"
+        />
+      </head>
       <body
         className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-cairo text-base text-gray-200 antialiased`}
       >
