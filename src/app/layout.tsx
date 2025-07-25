@@ -61,7 +61,10 @@ export const metadata = {
   icons: {
     icon: "/icon.ico",
   },
-  keywords: "cube",
+  keywords: "Speed cubing syria",
+  verification: {
+    google: "WCBTADGkk1aE4gdEWk4b8DxuoOKOfKVe45nFg2Br8y8",
+  },
 };
 
 export default function RootLayout({
