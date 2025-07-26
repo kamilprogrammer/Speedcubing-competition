@@ -81,7 +81,7 @@ export default function Hero() {
 
           <ModalPdf
             thumbWidth={1104}
-            thumbHeight={576}
+            thumbHeight={583}
             thumbAlt="Modal video thumbnail"
             pdf="/SSCO25.pdf"
           />
