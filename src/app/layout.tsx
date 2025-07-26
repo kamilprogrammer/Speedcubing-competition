@@ -1,6 +1,5 @@
 import "./style.css";
 
-import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import HeaderWrap from "./HeaderWrap";
 import Analytics from "./analytics";
@@ -23,12 +22,7 @@ const cairo = localFont({
 });
 console.log(cairo);
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
+/*
 const nacelle = localFont({
   src: [
     {
@@ -55,6 +49,7 @@ const nacelle = localFont({
   variable: "--font-nacelle",
   display: "swap",
 });
+*/
 
 export const metadata = {
   title: "Syria SpeedCubing Open 2025",
@@ -123,7 +118,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-cairo text-base text-gray-200 antialiased`}
+        className={`font-cairo bg-gray-950 text-base text-gray-200 antialiased`}
       >
         <HeaderWrap />
         <Analytics />
