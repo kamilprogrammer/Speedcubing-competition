@@ -28,8 +28,6 @@ export default function Home() {
         <CustomCursor />
         <HeroSection />
         <AnimatedTestimonials testimonials={testimonials} />
-        {/* 
-        <Cube />*/}
         <Cta />
       </main>
     </div>
