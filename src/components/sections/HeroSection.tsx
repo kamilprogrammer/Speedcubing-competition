@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PdfThumb from "..//..//..//public/images/pdf.png";
+import PdfThumb from "..//..//..//public/images/pdf.webp";
 import ModalPdf from "../ui/modal-pdf";
 import supabase from "../../app/supabase-client";
 import { Badge } from "@/components/ui/badge";
