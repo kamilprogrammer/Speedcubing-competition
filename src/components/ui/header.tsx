@@ -15,9 +15,9 @@ export default function Header() {
             </Link>
             <Link
               href="/"
-              className="ml-2 text-md font-semibold text-gray-300 mt-1 cursor-none"
+              className="ml-2 text-md font-semibold text-gray-300 cursor-none"
             >
-              <span className="font-black">SSCO 25</span>
+              <span className="font-bold font-cairo">SSCO 25</span>
             </Link>
           </div>
 

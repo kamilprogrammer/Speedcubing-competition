@@ -18,7 +18,7 @@ export default function Hero() {
         {/* Hero content */}
         <div className="py-12 md:py-20">
           {/* Section header */}
-          <div className="absolute inset-0 -z-10 h-[648px] sm:h-[648px] md:h-[800px] lg:h-[1012px] w-full bg-white [background:radial-gradient(140%_90%_at_50%_0%,#030712_40%,#FF6500_140%)]"></div>
+          <div className="absolute inset-0 -z-10 h-[754px] sm:h-[748px] md:h-[900px] lg:h-[1012px] w-full bg-white [background:radial-gradient(140%_90%_at_50%_0%,#030712_40%,#FF6500_140%)]"></div>
           <div className="pb-12 text-center items-center justify-center md:pb-20">
             <h1
               className="animate-[gradient_8s_linear_infinite] bg-[linear-gradient(to_right,var(--color-orange-500),var(--color-gray-50))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl"
