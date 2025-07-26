@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PdfThumb from "..//..//..//public/images/pdf.webp";
 import ModalPdf from "../ui/modal-pdf";
 import supabase from "../../app/supabase-client";
 import { Badge } from "@/components/ui/badge";
@@ -81,7 +80,6 @@ export default function Hero() {
           </div>
 
           <ModalPdf
-            thumb={PdfThumb}
             thumbWidth={1104}
             thumbHeight={576}
             thumbAlt="Modal video thumbnail"

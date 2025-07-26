@@ -72,6 +72,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/pdf.webp"
+          imageSrcSet="/images/pdf.webp 1x, /images/pdf@2x.webp 2x"
+          imageSizes="100vw"
+        />
         <meta name="description" content="Syria SpeedCubing Open 2025" />
 
         {/* Open Graph Meta for Social Sharing */}

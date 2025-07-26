@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useRef } from "react";
-import type { StaticImageData } from "next/image";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
 import { useIsMobile } from "../../app/isMobile";
 interface ModalPdfProps {
-  thumb: StaticImageData;
   thumbWidth: number;
   thumbHeight: number;
   thumbAlt: string;
@@ -14,7 +12,6 @@ interface ModalPdfProps {
 }
 
 export default function ModalPdf({
-  thumb,
   thumbWidth,
   thumbHeight,
   thumbAlt,
@@ -61,7 +58,7 @@ export default function ModalPdf({
               }
             }}
             className="opacity-50 grayscale"
-            src={thumb}
+            src="/images/pdf.webp"
             width={thumbWidth}
             height={thumbHeight}
             priority
