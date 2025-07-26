@@ -1,6 +1,5 @@
 import "./style.css";
 
-import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import HeaderWrap from "./HeaderWrap";
 import Analytics from "./analytics";
@@ -23,11 +22,6 @@ const cairo = localFont({
 });
 console.log(cairo);
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 /*
 const nacelle = localFont({
   src: [
