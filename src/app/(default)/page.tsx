@@ -3,7 +3,7 @@ import Cta from "@/components/sections/Cta";
 import HeroSection from "@/components/sections/HeroSection";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import CustomCursor from "@/components/ui/CustomCursor";
-
+import Footer from "./Footer";
 export default function Home() {
   const testimonials = [
     {
@@ -29,6 +29,7 @@ export default function Home() {
         <HeroSection />
         <AnimatedTestimonials testimonials={testimonials} />
         <Cta />
+        <Footer />
       </main>
     </div>
   );
