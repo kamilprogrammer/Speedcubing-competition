@@ -26,7 +26,7 @@ export default function ModalPdf({
       {/* Secondary illustration */}
 
       {/* Video thumbnail */}
-      <button
+      <div
         className="group cursor-none relative flex items-center justify-center rounded-2xl focus:outline-hidden focus-visible:ring-3 focus-visible:ring-indigo-200"
         onClick={() => {
           if (isMobile) {
@@ -76,19 +76,55 @@ export default function ModalPdf({
           }}
           className="pointer-events-none absolute p-2.5 before:absolute before:inset-0 before:rounded-full before:bg-gray-950 before:duration-300 group-hover:before:scale-110"
         >
-          <span className="relative flex items-center gap-3">
-            <span className="relative inline-block w-6 h-6 bg-gray-600 rounded-lg">
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[0.825rem] font-bold leading-none text-white">
+          <div
+            className="relative flex items-center gap-3"
+            onClick={() => {
+              if (isMobile) {
+                window.open(pdf, "_blank");
+              } else {
+                setModalOpen(true);
+              }
+            }}
+          >
+            <span
+              className="relative inline-block w-6 h-6 bg-gray-600 rounded-lg"
+              onClick={() => {
+                if (isMobile) {
+                  window.open(pdf, "_blank");
+                } else {
+                  setModalOpen(true);
+                }
+              }}
+            >
+              <span
+                onClick={() => {
+                  if (isMobile) {
+                    window.open(pdf, "_blank");
+                  } else {
+                    setModalOpen(true);
+                  }
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[0.825rem] font-bold leading-none text-white"
+              >
                 &#x1F4C7;
               </span>
             </span>
 
-            <span className="text-sm font-medium leading-tight text-gray-300">
+            <button
+              className="text-sm font-medium leading-tight text-gray-300"
+              onClick={() => {
+                if (isMobile) {
+                  window.open(pdf, "_blank");
+                } else {
+                  setModalOpen(true);
+                }
+              }}
+            >
               open the Schedule pdf
-            </span>
-          </span>
+            </button>
+          </div>
         </span>
-      </button>
+      </div>
       {/* End: Video thumbnail */}
 
       <Dialog

@@ -58,8 +58,7 @@ export default function Index() {
         .from("winners")
         .select("*, events(event_name)")
         .eq("eventid", select)
-        .eq("round", round)
-        .limit(round === 1 ? 10 : 3);
+        .eq("round", round);
 
       if (error) {
         console.error("Error fetching leaderboard:", error);
