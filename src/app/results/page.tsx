@@ -67,6 +67,30 @@ export default function Index() {
         const filteredData = data.filter(
           (entry) => entry.average_time !== null
         );
+        filteredData.map((entry) => {
+          if (entry.average_time < 60) {
+            if (entry.average_time < 10) {
+              entry.average_time =
+                "00:0" + Number(entry.average_time).toFixed(0);
+            } else {
+              entry.average_time =
+                "00:" + Number(entry.average_time).toFixed(0);
+            }
+          } else {
+            entry.average_time = "0" + (entry.average_time / 60).toFixed(0);
+          }
+
+          if (entry.best_solve < 60) {
+            if (entry.best_solve < 10) {
+              entry.best_solve = "00:0" + Number(entry.best_solve).toFixed(0);
+            } else {
+              entry.best_solve = "00:" + Number(entry.best_solve).toFixed(0);
+            }
+          } else {
+            entry.best_solve = "0" + (entry.best_solve / 60).toFixed(0);
+          }
+        });
+
         console.log(filteredData);
         setFirst(filteredData || []);
       }
@@ -114,7 +138,7 @@ export default function Index() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button className="cursor-none" variant="secondary">
-                  {day === 1 ? "Day 01" : day === 2 ? "Day 02" : ""}
+                  {day === 1 ? "Day 01 ▼" : day === 2 ? "Day 02 ▼" : ""}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="cursor-none">
