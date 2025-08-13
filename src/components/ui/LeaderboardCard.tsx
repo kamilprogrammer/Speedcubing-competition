@@ -82,9 +82,9 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
           </div>
           <div className="flex items-center gap-4 text-sm text-slate-400">
             <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
+              <p className="font-light text-slate-300">avg: </p>
               <span className="text-slate-300">
-                {entry.average_time ? entry.average_time + "s" : "N/A"}
+                {entry.average_time ? entry.average_time : "N/A"}
               </span>
             </div>
 
@@ -101,7 +101,9 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
               <p className="font-light text-slate-300">solves:</p>
               <span className="font-normal text-slate-300">
                 {entry.solves.map((solve, i) => {
-                  return solve + (entry.solves.length !== i + 1 ? ", " : "");
+                  return (
+                    solve + "s" + (entry.solves.length !== i + 1 ? ", " : "")
+                  );
                 })}
               </span>
             </div>

@@ -9,7 +9,7 @@ export default function Home() {
     {
       quote:
         "شغوف بعالم حل مكعب الروبيك وممثل عن مجتمع الشرق الأوسط، والمُنظم الرئيسي لأول بطولة رسمية في البلاد، بفضل جهوده، بدأت رياضة حل المكعب تجد مكانها في سوريا",
-      name: "Nihad AlSoufi",
+      name: "Mohamad Nihad AlSoufi",
       designation: "Founder of SSCC",
       src: "/images/Nihad.png",
     },
