@@ -1,5 +1,5 @@
 import { winner } from "../../app/types";
-import { Crown, Medal, Award, Trophy, Clock } from "lucide-react";
+import { Crown, Medal, Award, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface LeaderboardCardProps {
