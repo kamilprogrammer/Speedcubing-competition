@@ -76,7 +76,11 @@ export default function Index() {
                 "00:" + Number(entry.average_time).toFixed(2);
             }
           } else {
-            entry.average_time = "0" + (entry.average_time / 60).toFixed(0);
+            entry.average_time =
+              "0" +
+              (entry.average_time / 60).toFixed(0) +
+              ":" +
+              (entry.average_time - 60).toFixed(2);
           }
 
           if (entry.best_solve < 60) {
@@ -86,7 +90,11 @@ export default function Index() {
               entry.best_solve = "00:" + Number(entry.best_solve).toFixed(2);
             }
           } else {
-            entry.best_solve = "0" + (entry.best_solve / 60).toFixed(0);
+            entry.best_solve =
+              "0" +
+              (entry.best_solve / 60).toFixed(0) +
+              ":" +
+              (entry.best_solve - 60).toFixed(2);
           }
         });
 
