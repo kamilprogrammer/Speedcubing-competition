@@ -168,7 +168,6 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
             value={time3}
             onChange={(e) => setTime3(e.target.value)}
             className="bg-[#1a1a1d] text-white border-gray-700"
-            required
           />
           <p className="text-gray-500 p-0 m-0 mb-1">Time4:</p>
           <Input
@@ -177,7 +176,6 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
             value={time4}
             onChange={(e) => setTime4(e.target.value)}
             className="bg-[#1a1a1d] text-white border-gray-700"
-            required
           />
           <p className="text-gray-500 p-0 m-0 mb-1">Time5:</p>
           <Input
@@ -186,7 +184,6 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
             value={time5}
             onChange={(e) => setTime5(e.target.value)}
             className="bg-[#1a1a1d] text-white border-gray-700"
-            required
           />
 
           {/* Round */}
