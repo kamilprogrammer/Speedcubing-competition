@@ -70,10 +70,10 @@ export default function Index() {
           if (entry.average_time < 60) {
             if (entry.average_time < 10) {
               entry.average_time =
-                "00:0" + Number(entry.average_time).toFixed(0);
+                "00:0" + Number(entry.average_time).toFixed(2);
             } else {
               entry.average_time =
-                "00:" + Number(entry.average_time).toFixed(0);
+                "00:" + Number(entry.average_time).toFixed(2);
             }
           } else {
             entry.average_time = "0" + (entry.average_time / 60).toFixed(0);
@@ -81,9 +81,9 @@ export default function Index() {
 
           if (entry.best_solve < 60) {
             if (entry.best_solve < 10) {
-              entry.best_solve = "00:0" + Number(entry.best_solve).toFixed(0);
+              entry.best_solve = "00:0" + Number(entry.best_solve).toFixed(2);
             } else {
-              entry.best_solve = "00:" + Number(entry.best_solve).toFixed(0);
+              entry.best_solve = "00:" + Number(entry.best_solve).toFixed(2);
             }
           } else {
             entry.best_solve = "0" + (entry.best_solve / 60).toFixed(0);
