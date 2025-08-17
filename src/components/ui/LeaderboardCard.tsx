@@ -101,9 +101,7 @@ export function LeaderboardCard({ entry, index }: LeaderboardCardProps) {
               <p className="font-light text-slate-300">solves:</p>
               <span className="font-normal text-slate-300">
                 {entry.solves.map((solve, i) => {
-                  return (
-                    solve + "s" + (entry.solves.length !== i + 1 ? ", " : "")
-                  );
+                  return solve + (entry.solves.length !== i + 1 ? ", " : "");
                 })}
               </span>
             </div>

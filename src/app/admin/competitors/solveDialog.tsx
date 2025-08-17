@@ -82,42 +82,62 @@ export default function AddSolveDialog({ open, setOpen, user }: Props) {
         round: round,
       },
     ]);
-    const solve3 = await supabase.from("solves").insert([
-      {
-        time: time3,
-        userid: user.id,
-        eventid: Number(eventId),
-        round: round,
-      },
-    ]);
-    const solve4 = await supabase.from("solves").insert([
-      {
-        time: time4,
-        userid: user.id,
-        eventid: Number(eventId),
-        round: round,
-      },
-    ]);
-    const solve5 = await supabase.from("solves").insert([
-      {
-        time: time5,
-        userid: user.id,
-        eventid: Number(eventId),
-        round: round,
-      },
-    ]);
-
+    if (time3 !== "" && time4 !== "" && time5 !== "") {
+      const solve3 = await supabase.from("solves").insert([
+        {
+          time: time3,
+          userid: user.id,
+          eventid: Number(eventId),
+          round: round,
+        },
+      ]);
+      const solve4 = await supabase.from("solves").insert([
+        {
+          time: time4,
+          userid: user.id,
+          eventid: Number(eventId),
+          round: round,
+        },
+      ]);
+      const solve5 = await supabase.from("solves").insert([
+        {
+          time: time5,
+          userid: user.id,
+          eventid: Number(eventId),
+          round: round,
+        },
+      ]);
+      if (
+        error ||
+        solve2.error ||
+        solve3.error ||
+        solve4.error ||
+        solve5.error
+      ) {
+        setError(
+          (error?.message ||
+            solve2.error?.message ||
+            solve3.error?.message ||
+            solve4.error?.message ||
+            solve5.error?.message) ??
+            null
+        );
+      } else {
+        // Reset and close
+        setTime("");
+        setTime2("");
+        setTime3("");
+        setTime4("");
+        setTime5("");
+        setRound(0);
+        setEventId("");
+        setOpen(false);
+      }
+    }
     setLoading(false);
 
-    if (error || solve2.error || solve3.error || solve4.error || solve5.error) {
-      setError(
-        (error?.message ||
-          solve2.error?.message ||
-          solve3.error?.message ||
-          solve4.error?.message ||
-          solve5.error?.message) ??
-          null
-      );
+    if (error || solve2.error) {
+      setError((error?.message || solve2.error?.message) ?? null);
     } else {
       // Reset and close
       setTime("");
