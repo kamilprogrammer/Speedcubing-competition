@@ -67,35 +67,35 @@ export default function Index() {
           (entry) => entry.average_time !== null
         );
         filteredData.map((entry) => {
-          if (entry.average_time < 60) {
-            if (entry.average_time < 10) {
-              entry.average_time =
-                "00:0" + Number(entry.average_time).toFixed(2);
-            } else {
-              entry.average_time =
-                "00:" + Number(entry.average_time).toFixed(2);
-            }
-          } else {
-            entry.average_time =
-              "0" +
-              (entry.average_time / 60).toFixed(0) +
-              ":" +
-              (entry.average_time - 60).toFixed(2);
-          }
+          const totalSeconds = Number(entry.average_time);
+          const minutes = Math.floor(totalSeconds / 60);
+          const seconds = (totalSeconds % 60).toFixed(2);
 
-          if (entry.best_solve < 60) {
-            if (entry.best_solve < 10) {
-              entry.best_solve = "00:0" + Number(entry.best_solve).toFixed(2);
-            } else {
-              entry.best_solve = "00:" + Number(entry.best_solve).toFixed(2);
-            }
-          } else {
-            entry.best_solve =
-              "0" +
-              (entry.best_solve / 60).toFixed(0) +
+          entry.average_time =
+            String(minutes).padStart(2, "0") +
+            ":" +
+            String(seconds).padStart(5, "0");
+
+          const totalSecondsBest = Number(entry.best_solve);
+          const minutesBest = Math.floor(totalSecondsBest / 60);
+          const secondsBest = (totalSecondsBest % 60).toFixed(2);
+
+          entry.best_solve =
+            String(minutesBest).padStart(2, "0") +
+            ":" +
+            String(secondsBest).padStart(5, "0");
+
+          entry.solves = entry.solves.map((solve: string) => {
+            const totalSeconds = Number(solve);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = (totalSeconds % 60).toFixed(2);
+
+            return (
+              String(minutes).padStart(2, "0") +
               ":" +
-              (entry.best_solve - 60).toFixed(2);
-          }
+              String(seconds).padStart(5, "0")
+            );
+          });
         });
 
         console.log(filteredData);
