@@ -63,43 +63,80 @@ export default function Index() {
       if (error) {
         console.error("Error fetching leaderboard:", error);
       } else {
-        const filteredData = data.filter(
-          (entry) => entry.average_time !== null
-        );
-        filteredData.map((entry) => {
-          const totalSeconds = Number(entry.average_time);
-          const minutes = Math.floor(totalSeconds / 60);
-          const seconds = (totalSeconds % 60).toFixed(2);
+        // Sort data to put null average times at the bottom, then by best_solve
+        data.sort((a, b) => {
+          // If both have average times, sort by average time
+          if (a.average_time !== null && b.average_time !== null) {
+            return Number(a.average_time) - Number(b.average_time);
+          }
+          // If one has average time and the other doesn't, the one with average time comes first
+          if (a.average_time !== null) return -1;
+          if (b.average_time !== null) return 1;
+          // If both don't have average times, sort by best_solve
+          return Number(a.best_solve) - Number(b.best_solve);
+        });
 
-          entry.average_time =
-            String(minutes).padStart(2, "0") +
-            ":" +
-            String(seconds).padStart(5, "0");
+        data.map((entry) => {
+          // ✅ Format average_time
+          if (entry.average_time === "DNF") {
+            entry.average_time = "DNF";
+          } else if (entry.average_time === null) {
+            entry.average_time = "Cutoff"; // or "N/A"
+          } else {
+            const totalSeconds = Number(entry.average_time);
+            if (!isNaN(totalSeconds)) {
+              const minutes = Math.floor(totalSeconds / 60);
+              const seconds = (totalSeconds % 60).toFixed(2);
 
-          const totalSecondsBest = Number(entry.best_solve);
-          const minutesBest = Math.floor(totalSecondsBest / 60);
-          const secondsBest = (totalSecondsBest % 60).toFixed(2);
+              entry.average_time =
+                String(minutes).padStart(2, "0") +
+                ":" +
+                String(seconds).padStart(5, "0");
+            } else {
+              entry.average_time = "N/A"; // fallback
+            }
+          }
 
-          entry.best_solve =
-            String(minutesBest).padStart(2, "0") +
-            ":" +
-            String(secondsBest).padStart(5, "0");
+          // ✅ Format best_solve
+          if (entry.best_solve === "DNF") {
+            entry.best_solve = "DNF";
+          } else {
+            const totalSecondsBest = Number(entry.best_solve);
+            if (!isNaN(totalSecondsBest)) {
+              const minutesBest = Math.floor(totalSecondsBest / 60);
+              const secondsBest = (totalSecondsBest % 60).toFixed(2);
 
+              entry.best_solve =
+                String(minutesBest).padStart(2, "0") +
+                ":" +
+                String(secondsBest).padStart(5, "0");
+            } else {
+              entry.best_solve = "N/A";
+            }
+          }
+
+          // ✅ Format each solve
           entry.solves = entry.solves.map((solve: string) => {
-            const totalSeconds = Number(solve);
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = (totalSeconds % 60).toFixed(2);
+            if (solve === "DNF") return "DNF";
 
-            return (
-              String(minutes).padStart(2, "0") +
-              ":" +
-              String(seconds).padStart(5, "0")
-            );
+            const totalSeconds = Number(solve);
+            if (!isNaN(totalSeconds)) {
+              const minutes = Math.floor(totalSeconds / 60);
+              const seconds = (totalSeconds % 60).toFixed(2);
+
+              return (
+                String(minutes).padStart(2, "0") +
+                ":" +
+                String(seconds).padStart(5, "0")
+              );
+            } else {
+              return "N/A";
+            }
           });
         });
 
-        console.log(filteredData);
-        setFirst(filteredData || []);
+        console.log(data);
+        setFirst(data || []);
       }
     });
   };
